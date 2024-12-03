@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./home";
 
 function App() {
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  document.onkeydown = function (e) {  
+// disable F12 key
+if(e.keyCode == 123) {  
+return false;
+}
+ 
+// disable I key
+if(e.ctrlKey && e.shiftKey && e.keyCode == 73){ 
+return false; 
+} 
+
+// disable J key0 
+if(e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+return false;
+}
+
+// disable U key
+if(e.ctrlKey && e.keyCode == 85) {
+return false;
+}
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="*" element={<Home />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
